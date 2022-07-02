@@ -1,7 +1,7 @@
 
 import './style.css'
 import * as THREE from 'three'
-import {OrbitControls} from "three/examples/jsm/controls/OrbitControls" 
+//import {OrbitControls} from "three/examples/jsm/controls/OrbitControls" 
 
 var scene, camera, skyLight, renderer,
 HEIGHT,WIDTH,aspectRatio, nearPlane, farPlane
@@ -15,18 +15,18 @@ const fieldSize = {
 }
 
 var Colors = [
-    0xf25346,
-    0xd8d0d1,
-    0x59332e,
-    0xF5986E,
-    0x23190f,
-    0x68c3c0,]
+    0x399123,
+    0x237d91,
+    0x233591,
+    0x5f2391,
+    0x91232b,
+    0xd4c719,]
 var diseSize = 20
 var diseHeight = 10
 var offset = diseSize+0.5*2
-var planeZ = -3
-var camPos = {x:0,y:0,z:200}
-var camTarget = {x:0, y:0, z:0}
+var planeZ = 0
+var camPos = {x:30,y:50,z:200}
+var camTarget = {x:30,y:50,z:0}
 var startTime
 
 const init = function(){
@@ -39,18 +39,16 @@ scene = new THREE.Scene()
 HEIGHT = window.innerHeight
 WIDTH = window.innerWidth
 aspectRatio = WIDTH/HEIGHT
-nearPlane = 1
-farPlane = 10000
+nearPlane = .1
+farPlane = 1000
 
-camera = new THREE.PerspectiveCamera(75, aspectRatio,nearPlane,farPlane)
+camera = new THREE.PerspectiveCamera(55, aspectRatio,nearPlane,farPlane)
 //const camera = new THREE.OrthographicCamera(WIDTH/-20,WIDTH/20, HEIGHT/20, HEIGHT/-20,0.1,500)
-camera.position.x = 0
-camera.position.y = 0
-camera.position.z = 50
-//camera.position.set(camPos.x,camPos.y,camPos.z)
-//camera.lookAt(camTarget.x,camTarget.y,camTarget.z)
+camera.position.set(camPos.x,camPos.y,camPos.z)
+camera.lookAt(camTarget.x,camTarget.y,camTarget.z)
 scene.add(camera)
-
+console.log(camera.position)
+console.log(camTarget)
 //object
 // const geometry = new THREE.BoxGeometry(5,5,5)
 // const material = new THREE.MeshPhongMaterial({ color: 0xff0000 })
@@ -105,14 +103,14 @@ renderer = new THREE.WebGLRenderer({
     alpha: true,
     antialias: true
 })
-renderer.shadowMap.enabled = true
+//renderer.shadowMap.enabled = true
 renderer.setSize(WIDTH, HEIGHT)
 document.body.appendChild( renderer.domElement );
-camera.position.set(40,60,200)
+//camera.position.set(40,60,200)
 
-const controls = new OrbitControls(camera, renderer.domElement)
-controls.target.set( 40, 60, 0 );
-controls.update();
+// const controls = new OrbitControls(camera, renderer.domElement)
+// controls.target.set( 40, 60, 0 );
+// controls.update();
 
 
 }
@@ -155,7 +153,7 @@ const swapSomeElement = function(){
 
 
 init()
-animate()
+//animate()
 //renderer.render(scene,camera)
 
 
@@ -170,3 +168,5 @@ function animate() {
     renderer.render( scene, camera );
 
 }
+
+renderer.render( scene, camera );
